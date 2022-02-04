@@ -1,17 +1,25 @@
 import React from "react";
-import {nanoid} from "nanoid"
+import { nanoid } from "nanoid";
 
 function Die1(props) {
   return (
-    <div className="die1" onClick={props.clickHandler}>
+    <div
+      className="die1"
+      style={{ backgroundColor: `${props.isHeld ? "#E4B16E" : "#ffffff"}` }}
+      onClick={props.clickHandler}
+    >
       <span className="dot"></span>
     </div>
   );
 }
 
-function Die2() {
+function Die2(props) {
   return (
-    <div className="die2">
+    <div
+      className="die2"
+      style={{ backgroundColor: `${props.isHeld ? "#E4B16E" : "#ffffff"}` }}
+      onClick={props.clickHandler}
+    >
       <span className="dot"></span>
       <span
         className="dot"
@@ -23,9 +31,13 @@ function Die2() {
   );
 }
 
-function Die3() {
+function Die3(props) {
   return (
-    <div className="die3">
+    <div
+      className="die3"
+      style={{ backgroundColor: `${props.isHeld ? "#E4B16E" : "#ffffff"}` }}
+      onClick={props.clickHandler}
+    >
       <span className="dot"></span>
       <span
         className="dot"
@@ -43,9 +55,13 @@ function Die3() {
   );
 }
 
-function Die4() {
+function Die4(props) {
   return (
-    <div className="die4">
+    <div
+      className="die4"
+      style={{ backgroundColor: `${props.isHeld ? "#E4B16E" : "#ffffff"}` }}
+      onClick={props.clickHandler}
+    >
       <span className="dot"></span>
       <span className="dot"></span>
       <span className="dot"></span>
@@ -56,7 +72,11 @@ function Die4() {
 
 function Die5(props) {
   return (
-    <div className="die5" style={{ backgroundColor: `${props.style}` }}>
+    <div
+      className="die5"
+      style={{ backgroundColor: `${props.isHeld ? "#E4B16E" : "#ffffff"}` }}
+      onClick={props.clickHandler}
+    >
       <span className="dot"></span>
       <span className="dot"></span>
       <span className="dot"></span>
@@ -65,9 +85,13 @@ function Die5(props) {
   );
 }
 
-function Die6() {
+function Die6(props) {
   return (
-    <div className="die6">
+    <div
+      className="die6"
+      style={{ backgroundColor: `${props.isHeld ? "#E4B16E" : "#ffffff"}` }}
+      onClick={props.clickHandler}
+    >
       <span className="dot"></span>
       <span className="dot"></span>
       <span className="dot"></span>
@@ -91,34 +115,111 @@ function Instruction() {
 }
 
 function Gameboard() {
-  const [dice, setDice] = React.useState({
-    value: "",
-    isHeld: false,
-    id: nanoid()
-  });
+  function rollDice() {
+    const randomNumber = Math.ceil(Math.random() * 6);
+    return {
+      value: randomNumber,
+      isHeld: false,
+      id: nanoid(),
+    };
+  }
 
-function holdDice() {
-    console.log("Clicked")
-}
+  function allNewDice() {
+    const diceArray = [];
+    for (let i = 0; i < 10; i++) {
+      diceArray.push(rollDice());
+    }
+    return diceArray;
+  }
 
+  const [dice, setDice] = React.useState(() => allNewDice());
+
+  function holdDice(id) {
+    setDice(
+      dice.map((prevDice) =>
+        prevDice.id === id
+          ? { ...prevDice, isHeld: !prevDice.isHeld }
+          : prevDice
+      )
+    );
+  }
+
+  function newDice() {
+    setDice(dice.map((die) => (die.isHeld ? die : rollDice())));
+  }
+
+  function renderDie(num) {
+    let value = num.value;
+    switch (value) {
+      case 1:
+        value = (
+          <Die1
+            key={num.id}
+            isHeld={num.isHeld}
+            clickHandler={(id) => holdDice(num.id)}
+          />
+        );
+        break;
+      case 2:
+        value = (
+          <Die2
+            key={num.id}
+            isHeld={num.isHeld}
+            clickHandler={(id) => holdDice(num.id)}
+          />
+        );
+        break;
+      case 3:
+        value = (
+          <Die3
+            key={num.id}
+            isHeld={num.isHeld}
+            clickHandler={(id) => holdDice(num.id)}
+          />
+        );
+        break;
+      case 4:
+        value = (
+          <Die4
+            key={num.id}
+            isHeld={num.isHeld}
+            clickHandler={(id) => holdDice(num.id)}
+          />
+        );
+        break;
+      case 5:
+        value = (
+          <Die5
+            key={num.id}
+            isHeld={num.isHeld}
+            clickHandler={(id) => holdDice(num.id)}
+          />
+        );
+        break;
+      case 6:
+        value = (
+          <Die6
+            key={num.id}
+            isHeld={num.isHeld}
+            clickHandler={(id) => holdDice(num.id)}
+          />
+        );
+        break;
+    }
+
+    return value;
+  }
+
+  const dieElements = (
+    <div className="dice">{dice.map((die) => renderDie(die))}</div>
+  );
 
   return (
     <main>
       <div className="box">
-        <Instruction></Instruction>
-        <div className="dice">
-          <Die1 clickHandler={holdDice}></Die1>
-          <Die2></Die2>
-          <Die3></Die3>
-          <Die4></Die4>
-          <Die5 style={"red"} clickHandler={holdDice}></Die5>
-          <Die6></Die6>
-          <Die4></Die4>
-          <Die5></Die5>
-          <Die6></Die6>
-          <Die4></Die4>
-        </div>
-        <button>Restart &#9865;</button>
+        <Instruction />
+        {dieElements}
+        <button onClick={newDice}>Restart &#9865;</button>
       </div>
     </main>
   );
