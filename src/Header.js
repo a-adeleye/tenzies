@@ -4,7 +4,9 @@ export default function Header(props) {
 
     const [play, setPlay] = React.useState({plays: 2, bestTime: "15 minutes", leastRoll: 12, highestTime: 15, highestRoll: 15})
 
-    const {plays,bestTime,leastRoll,highestTime,highestRoll} = play
+    const {plays,bestTime,leastRoll,highestTime,highestRoll} = play;
+
+
 
     return (
       <header>

@@ -1,9 +1,7 @@
 import React from "react";
-import { nanoid } from "nanoid";
-import {Die1, Die2, Die3, Die4, Die5, Die6} from "./Dice";
-import Tenzies from "./Tenzies"
-import Confetti from 'react-confetti';
-
+import { Die1, Die2, Die3, Die4, Die5, Die6 } from "./Dice";
+import Tenzies from "./Tenzies";
+import Confetti from "react-confetti";
 
 function Instruction() {
   return (
@@ -17,45 +15,9 @@ function Instruction() {
   );
 }
 
-function Gameboard() {
-  function rollDice() {
-    const randomNumber = Math.ceil(Math.random() * 6);
-    return {
-      value: randomNumber,
-      isHeld: false,
-      id: nanoid(),
-    };
-  }
+function Gameboard(props) {
 
-  function allNewDice() {
-    const diceArray = [];
-    for (let i = 0; i < 10; i++) {
-      diceArray.push(rollDice());
-    }
-    return diceArray;
-  }
 
-  const [dice, setDice] = React.useState(() => allNewDice());
-
-  const [tenzies, setTenzies] = React.useState(false);
-
-  React.useEffect(() => {
-    setTenzies(dice.every(die => die.isHeld == true) && dice.every(die => die.value === dice[0].value))
-  },[dice])
-
-  function holdDice(id) {
-    setDice(
-      dice.map((prevDice) =>
-        prevDice.id === id
-          ? { ...prevDice, isHeld: !prevDice.isHeld }
-          : prevDice
-      )
-    );
-  }
-
-  function newDice() {
-    setDice(dice.map((die) => (die.isHeld ? die : rollDice())));
-  }
 
   function renderDie(num) {
     let value = num.value;
@@ -65,7 +27,7 @@ function Gameboard() {
           <Die1
             key={num.id}
             isHeld={num.isHeld}
-            clickHandler={(id) => holdDice(num.id)}
+            clickHandler={(id) => props.holdDice(num.id)}
           />
         );
         break;
@@ -74,7 +36,7 @@ function Gameboard() {
           <Die2
             key={num.id}
             isHeld={num.isHeld}
-            clickHandler={(id) => holdDice(num.id)}
+            clickHandler={(id) => props.holdDice(num.id)}
           />
         );
         break;
@@ -83,7 +45,7 @@ function Gameboard() {
           <Die3
             key={num.id}
             isHeld={num.isHeld}
-            clickHandler={(id) => holdDice(num.id)}
+            clickHandler={(id) => props.holdDice(num.id)}
           />
         );
         break;
@@ -92,7 +54,7 @@ function Gameboard() {
           <Die4
             key={num.id}
             isHeld={num.isHeld}
-            clickHandler={(id) => holdDice(num.id)}
+            clickHandler={(id) => props.holdDice(num.id)}
           />
         );
         break;
@@ -101,7 +63,7 @@ function Gameboard() {
           <Die5
             key={num.id}
             isHeld={num.isHeld}
-            clickHandler={(id) => holdDice(num.id)}
+            clickHandler={(id) => props.holdDice(num.id)}
           />
         );
         break;
@@ -110,7 +72,7 @@ function Gameboard() {
           <Die6
             key={num.id}
             isHeld={num.isHeld}
-            clickHandler={(id) => holdDice(num.id)}
+            clickHandler={(id) => props.holdDice(num.id)}
           />
         );
         break;
@@ -119,24 +81,19 @@ function Gameboard() {
     return value;
   }
 
-  function restartGame (){
-      setTenzies(false);
-     setDice(allNewDice());
-  }
-
   const dieElements = (
-    <div className="dice">{dice.map((die) => renderDie(die))}</div>
+    <div className="dice">{props.dice.map((die) => renderDie(die))}</div>
   );
 
   return (
     <main>
       <div className="box">
-        {tenzies && <Confetti />}
+        {props.tenzies && <Confetti />}
         <Instruction />
         {dieElements}
-        <button onClick={newDice}>Roll  &#9865;</button>
+        <button onClick={props.newDice}>Roll &#9865;</button>
       </div>
-      <Tenzies restart={restartGame} tenzies={tenzies}/>
+      <Tenzies restart={props.restartGame} tenzies={props.tenzies} />
     </main>
   );
 }
