@@ -13,13 +13,13 @@ export default function Header(props) {
         </div>
 
         <div className="scoreboard">
-          <h3>Your best</h3>
-          <div className="number">{leastRoll || ""}</div>
-        </div>
-        
-        <div className="scoreboard">
           <h3>Highest roll</h3>
           <div className="number">{highestRoll || ""}</div>
+        </div>
+
+        <div className="scoreboard">
+          <h3>Your best</h3>
+          <div className="number">{leastRoll || ""}</div>
         </div>
 
       </header>
