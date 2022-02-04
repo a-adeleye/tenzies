@@ -16,9 +16,6 @@ function Instruction() {
 }
 
 function Gameboard(props) {
-
-
-
   function renderDie(num) {
     let value = num.value;
     switch (value) {
@@ -76,6 +73,8 @@ function Gameboard(props) {
           />
         );
         break;
+      default: 
+      value = "";
     }
 
     return value;

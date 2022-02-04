@@ -20,7 +20,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 2s;
 }
 
 .box,
@@ -30,6 +29,7 @@ main {
   flex-direction: column;
   align-items: center;
   border-radius: 1em;
+  transition: 2s;
 }
 
 .box {
@@ -139,7 +139,8 @@ button:active {
 
 .scoreboard {
   display: flex;
-  gap: 1em;
+  width: 10em;
+  justify-content: space-between;
 }
 
 .number {
@@ -153,4 +154,21 @@ button:active {
   background-color: #e4b16e;
   color: #000000;
   font-weight: 700;
+}
+
+@media only screen and (max-width: 542px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    min-height: 150px;
+  }
+
+  main {
+    align-items: flex-start;
+    padding: 2em;
+  }
+
+  .scoreboard {
+  }
 }
