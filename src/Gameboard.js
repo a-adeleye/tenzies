@@ -37,7 +37,7 @@ function Gameboard() {
   const [tenzies, setTenzies] = React.useState(false);
 
   React.useEffect(() => {
-    console.log(dice.every(die => die.value === dice[0].value))
+    console.log(dice.every(die => die.isHeld == true) && dice.every(die => die.value === dice[0].value))
   })
 
   function holdDice(id) {
