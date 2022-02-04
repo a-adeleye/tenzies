@@ -1,12 +1,13 @@
-import './App.css';
-import Gameboard from './Gameboard';
+import "./App.css";
+import React from "react"
+import Header from "./Header";
+import Gameboard from "./Gameboard";
 
 function App() {
+
   return (
     <div className="App">
-      <header>
-        <h1>I am header</h1>
-      </header>
+      <Header></Header>
       <Gameboard></Gameboard>
     </div>
   );

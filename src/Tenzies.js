@@ -6,7 +6,7 @@ export default function Tenzies(props) {
 
     return(
         <div className="tenzies" style={style}>
-            <h1>Tenzies!!!</h1>
+            <h1>Tenzies!!! 😋</h1>
             <button onClick={props.restart}>Restart Game</button>
         </div>
 

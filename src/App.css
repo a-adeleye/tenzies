@@ -7,10 +7,11 @@
 header {
   height: 12vh;
   background-color: #2a2c2b;
-  color: #ffffff;
+  color: #9d918b;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 3em;
 }
 
 main {
@@ -134,4 +135,22 @@ button:active {
   gap: 2em;
   transition: 0.4s;
   overflow: hidden;
+}
+
+.scoreboard {
+  display: flex;
+  gap: 1em;
+}
+
+.number {
+  min-width: 2em;
+  height: 2em;
+  padding: 0.2em 0.3em;
+  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e4b16e;
+  color: #000000;
+  font-weight: 700;
 }

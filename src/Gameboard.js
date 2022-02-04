@@ -43,8 +43,6 @@ function Gameboard() {
     setTenzies(dice.every(die => die.isHeld == true) && dice.every(die => die.value === dice[0].value))
   },[dice])
 
-  console.log(tenzies)
-
   function holdDice(id) {
     setDice(
       dice.map((prevDice) =>
