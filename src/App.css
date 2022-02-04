@@ -5,7 +5,7 @@
 }
 
 header {
-  height: 12vh;
+  height: 11vh;
   background-color: #2a2c2b;
   color: #9d918b;
   display: flex;
@@ -140,7 +140,7 @@ button:active {
 .scoreboard {
   display: flex;
   width: 10em;
-  justify-content: space-between;
+  gap: 0.6em;
 }
 
 .number {
@@ -156,7 +156,18 @@ button:active {
   font-weight: 700;
 }
 
-@media only screen and (max-width: 542px) {
+footer {
+  height: 3em;
+  position: fixed;
+  inset: auto 0 0 0;
+  background-color: #2a2c2b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 590px) {
   header {
     flex-direction: column;
     justify-content: center;
@@ -170,5 +181,6 @@ button:active {
   }
 
   .scoreboard {
+    justify-content: space-between;
   }
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import { Die1, Die2, Die3, Die4, Die5, Die6 } from "./Dice";
-import Tenzies from "./Tenzies";
+import EndGame from "./EndGame";
 import Confetti from "react-confetti";
+import Footer from "./Footer";
 
 function Instruction() {
   return (
@@ -92,7 +93,8 @@ function Gameboard(props) {
         {dieElements}
         <button onClick={props.newDice}>Roll &#9865;</button>
       </div>
-      <Tenzies restart={props.restartGame} tenzies={props.tenzies} />
+      <EndGame restart={props.restartGame} tenzies={props.tenzies} />
+      <Footer />
     </main>
   );
 }

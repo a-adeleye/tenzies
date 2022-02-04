@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
-import Header from "./Header";
-import Gameboard from "./Gameboard";
+import Header from "./components/Header";
+import Gameboard from "./components/Gameboard";
 import { nanoid } from "nanoid";
 
 function App() {

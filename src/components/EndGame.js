@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Tenzies(props) {
+export default function EndGame(props) {
 
     const style = props.tenzies ? {padding: "2em 1em", border: "0.7em solid #bdc3c7", height: "25em"} : {padding: "0", border: "none", height: "0"};
 
