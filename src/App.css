@@ -19,18 +19,23 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 2s;
+}
+
+.box,
+.tenzies {
+  width: 25em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1em;
 }
 
 .box {
   height: 25em;
-  width: 25em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 2em 1em;
-  align-items: center;
   background-color: #3d302b;
-  border-radius: 1em;
+  justify-content: space-between;
   border: 0.7em solid #bdc3c7;
 }
 
@@ -122,13 +127,11 @@ button:active {
   box-shadow: inset 0 0 1em #bd0f4c;
 }
 
-.die {
-  width: 3em;
-  height: 3em;
-  border-radius: 0.4em;
-  cursor: pointer;
-  color: white;
-  display: flex;
-  align-items: center;
+.tenzies {
+  position: absolute;
+  background-color: #e4b16e;
   justify-content: center;
+  gap: 2em;
+  transition: 0.4s;
+  overflow: hidden;
 }

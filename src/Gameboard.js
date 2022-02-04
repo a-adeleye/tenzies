@@ -1,6 +1,9 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import {Die1, Die2, Die3, Die4, Die5, Die6} from "./Dice"
+import {Die1, Die2, Die3, Die4, Die5, Die6} from "./Dice";
+import Tenzies from "./Tenzies"
+import Confetti from 'react-confetti';
+
 
 function Instruction() {
   return (
@@ -37,8 +40,10 @@ function Gameboard() {
   const [tenzies, setTenzies] = React.useState(false);
 
   React.useEffect(() => {
-    console.log(dice.every(die => die.isHeld == true) && dice.every(die => die.value === dice[0].value))
-  })
+    setTenzies(dice.every(die => die.isHeld == true) && dice.every(die => die.value === dice[0].value))
+  },[dice])
+
+  console.log(tenzies)
 
   function holdDice(id) {
     setDice(
@@ -116,6 +121,11 @@ function Gameboard() {
     return value;
   }
 
+  function restartGame (){
+      setTenzies(false);
+     setDice(allNewDice());
+  }
+
   const dieElements = (
     <div className="dice">{dice.map((die) => renderDie(die))}</div>
   );
@@ -123,10 +133,12 @@ function Gameboard() {
   return (
     <main>
       <div className="box">
+        {tenzies && <Confetti />}
         <Instruction />
         {dieElements}
-        <button onClick={newDice}>Restart &#9865;</button>
+        <button onClick={newDice}>Roll  &#9865;</button>
       </div>
+      <Tenzies restart={restartGame} tenzies={tenzies}/>
     </main>
   );
 }
